@@ -9,6 +9,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <pwd.h>
 #include <CoreFoundation/CoreFoundation.h>
 #include <CoreGraphics/CoreGraphics.h>
 #include <CoreServices/CoreServices.h>
@@ -48,12 +49,38 @@ int (*SpawnOld)(pid_t * pid, const char * path, const posix_spawn_file_actions_t
 int SpawnNew(pid_t * pid, const char * path, const posix_spawn_file_actions_t * ac, const posix_spawnattr_t * ab, char *const __argv[], char *const __envp[])
 {
     char *fakeEnvVar;
+    char *fakeExtVar;
+    
     if (strcmp(path, "/usr/libexec/xpcproxy") == 0)
     {
-        fakeEnvVar = "DYLD_INSERT_LIBRARIES="SupportFolderP"liblibinfect.dylib";
+        fakeEnvVar = "DYLD_INSERT_LIBRARIES=" SupportFolderP"liblibinfect.dylib";
+    } else if (strcmp(path, "/System/Library/Frameworks/CryptoTokenKit.framework/ctkahp.bundle/Contents/MacOS/ctkahp") == 0)
+    {
+        return SpawnOld(pid, path, ac, ab, __argv, __envp);
+    } else if (strcmp(path, "/System/Library/PrivateFrameworks/Heimdal.framework/Helpers/kcm") == 0)
+    {
+        return SpawnOld(pid, path, ac, ab, __argv, __envp);
+    } else if (strcmp(path, "/System/Library/Frameworks/CryptoTokenKit.framework/UserSelector") == 0)
+    {
+        return SpawnOld(pid, path, ac, ab, __argv, __envp);
+    } else if (strcmp(path, "/System/Library/Frameworks/CryptoTokenKit.framework/ctkd") == 0)
+    {
+        return SpawnOld(pid, path, ac, ab, __argv, __envp);
+    } else if (strcmp(path, "/System/Library/Frameworks/GSS.framework/Helpers/GSSCred") == 0)
+    {
+        return SpawnOld(pid, path, ac, ab, __argv, __envp);
+    } else if (strcmp(path, "/System/Library/CoreServices/iconservicesagent") == 0)
+    {
+        return SpawnOld(pid, path, ac, ab, __argv, __envp);
+    } else if (strcmp(path, "/System/Library/CoreServices/iconservicesd") == 0)
+    {
+        return SpawnOld(pid, path, ac, ab, __argv, __envp);
+    } else if (strcmp(path, "/usr/libexec/UserEventAgent") == 0)
+    {
+        return SpawnOld(pid, path, ac, ab, __argv, __envp);
     } else
     {
-        fakeEnvVar = "DYLD_INSERT_LIBRARIES="SupportFolderP"libopener.dylib";
+        fakeEnvVar = "DYLD_INSERT_LIBRARIES=" SupportFolderP"libopener.dylib";
     }
     
     int envCount = 0;
@@ -84,12 +111,10 @@ int SpawnNew(pid_t * pid, const char * path, const posix_spawn_file_actions_t * 
         return -1;
     }
 
-    newEnvp[envCount + 1] = NULL;
-
     
-    // LogToFile("---- %s\n", path);
-    // for (int i = 0; i < envCount + 1; i++) { LogToFile("-- %s\n", newEnvp[i]); }
-    // LogToFile("\n");
+    LogToFile("---- %s\n", path);
+    for (int i = 0; i < envCount + 1; i++) { LogToFile("-- %s\n", newEnvp[i]); }
+    LogToFile("\n");
     
     int k = SpawnOld(pid, path, ac, ab, __argv, (char *const *)newEnvp);
     for (int i = 0; i <= envCount; i++) { free(newEnvp[i]); }
@@ -102,6 +127,6 @@ void __attribute__((constructor)) Infect(void)
     gum_init_embedded();
     GumInterceptor *interceptor = gum_interceptor_obtain();
     gum_interceptor_begin_transaction (interceptor);
-    gum_interceptor_replace (interceptor, (gpointer)gum_module_find_export_by_name(NULL, "posix_spawn"), SpawnNew, NULL, &SpawnOld);
+    gum_interceptor_replace (interceptor, (gpointer)gum_module_find_export_by_name(NULL, "posix_spawn"), (gpointer)SpawnNew, NULL, (gpointer *)&SpawnOld);
     gum_interceptor_end_transaction (interceptor);
 }

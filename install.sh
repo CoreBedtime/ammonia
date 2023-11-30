@@ -7,6 +7,8 @@ xcodebuild -project ammonia.xcodeproj -target ammonia -configuration clean
 
 mkdir /usr/local/bin/ammonia/
 
+cp ./fridagum.dylib /usr/local/bin/ammonia/
+
 mv ./Build/Release/ammonia /usr/local/bin/ammonia/
 mv ./Build/Release/liblibinfect.dylib /usr/local/bin/ammonia/
 mv ./Build/Release/libopener.dylib /usr/local/bin/ammonia/

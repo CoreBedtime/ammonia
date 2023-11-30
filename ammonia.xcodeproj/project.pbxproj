@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		655B383A2B139EBE002FE760 /* libsystem_sandbox.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 655B38392B139EB7002FE760 /* libsystem_sandbox.tbd */; };
 		9D2589BD2B0C1F2000502E94 /* libfrida-gum-x86_64-arm64e-arm64.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D2589BC2B0C1F2000502E94 /* libfrida-gum-x86_64-arm64e-arm64.a */; };
 		9D2589C12B0C201600502E94 /* frida-gum.h in Headers */ = {isa = PBXBuildFile; fileRef = 9D2589C02B0C201600502E94 /* frida-gum.h */; };
 		9D5E93A22B0CE4CC00B93A06 /* opener.h in Headers */ = {isa = PBXBuildFile; fileRef = 9D5E93A02B0CE4CC00B93A06 /* opener.h */; };
@@ -31,6 +32,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		655B38392B139EB7002FE760 /* libsystem_sandbox.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsystem_sandbox.tbd; path = usr/lib/system/libsystem_sandbox.tbd; sourceTree = SDKROOT; };
 		9D2589BB2B0C1EEB00502E94 /* setup_frida.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = setup_frida.sh; sourceTree = "<group>"; };
 		9D2589BC2B0C1F2000502E94 /* libfrida-gum-x86_64-arm64e-arm64.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libfrida-gum-x86_64-arm64e-arm64.a"; sourceTree = "<group>"; };
 		9D2589C02B0C201600502E94 /* frida-gum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "frida-gum.h"; sourceTree = "<group>"; };
@@ -72,6 +74,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9D7B40192B0C390F009AF1CB /* libbsm.tbd in Frameworks */,
+				655B383A2B139EBE002FE760 /* libsystem_sandbox.tbd in Frameworks */,
 				9D2589BD2B0C1F2000502E94 /* libfrida-gum-x86_64-arm64e-arm64.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -132,6 +135,7 @@
 		9DF5B8F82B0AFD5C004F8555 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				655B38392B139EB7002FE760 /* libsystem_sandbox.tbd */,
 				9D2589BC2B0C1F2000502E94 /* libfrida-gum-x86_64-arm64e-arm64.a */,
 				9DF5B9012B0B1BF2004F8555 /* libEndpointSecurity.tbd */,
 				9DF5B8FF2B0B1BE4004F8555 /* libbsm.tbd */,
@@ -536,6 +540,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(SDKROOT)/usr/lib/system",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -560,6 +565,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(SDKROOT)/usr/lib/system",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
