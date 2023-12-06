@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		655B383A2B139EBE002FE760 /* libsystem_sandbox.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 655B38392B139EB7002FE760 /* libsystem_sandbox.tbd */; };
 		9D2589BD2B0C1F2000502E94 /* libfrida-gum-x86_64-arm64e-arm64.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D2589BC2B0C1F2000502E94 /* libfrida-gum-x86_64-arm64e-arm64.a */; };
 		9D2589C12B0C201600502E94 /* frida-gum.h in Headers */ = {isa = PBXBuildFile; fileRef = 9D2589C02B0C201600502E94 /* frida-gum.h */; };
 		9D5E93A22B0CE4CC00B93A06 /* opener.h in Headers */ = {isa = PBXBuildFile; fileRef = 9D5E93A02B0CE4CC00B93A06 /* opener.h */; };
@@ -74,7 +73,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				9D7B40192B0C390F009AF1CB /* libbsm.tbd in Frameworks */,
-				655B383A2B139EBE002FE760 /* libsystem_sandbox.tbd in Frameworks */,
 				9D2589BD2B0C1F2000502E94 /* libfrida-gum-x86_64-arm64e-arm64.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
