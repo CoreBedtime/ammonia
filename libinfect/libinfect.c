@@ -49,11 +49,10 @@ int (*SpawnOld)(pid_t * pid, const char * path, const posix_spawn_file_actions_t
 int SpawnNew(pid_t * pid, const char * path, const posix_spawn_file_actions_t * ac, const posix_spawnattr_t * ab, char *const __argv[], char *const __envp[])
 {
     char *fakeEnvVar;
-    char *fakeExtVar;
     
     if (strcmp(path, "/usr/libexec/xpcproxy") == 0)
     {
-        fakeEnvVar = "DYLD_INSERT_LIBRARIES=" SupportFolderP"liblibinfect.dylib";
+        fakeEnvVar = "DYLD_INSERT_LIBRARIES="SupportFolderP"liblibinfect.dylib";
     } else if (strcmp(path, "/System/Library/Frameworks/CryptoTokenKit.framework/ctkahp.bundle/Contents/MacOS/ctkahp") == 0)
     {
         return SpawnOld(pid, path, ac, ab, __argv, __envp);
@@ -80,7 +79,7 @@ int SpawnNew(pid_t * pid, const char * path, const posix_spawn_file_actions_t * 
         return SpawnOld(pid, path, ac, ab, __argv, __envp);
     } else
     {
-        fakeEnvVar = "DYLD_INSERT_LIBRARIES=" SupportFolderP"libopener.dylib";
+        fakeEnvVar = "DYLD_INSERT_LIBRARIES="SupportFolderP"libopener.dylib";
     }
     
     int envCount = 0;
@@ -110,7 +109,7 @@ int SpawnNew(pid_t * pid, const char * path, const posix_spawn_file_actions_t * 
         free(newEnvp);
         return -1;
     }
-
+    newEnvp[envCount + 1] = NULL;
     
     LogToFile("---- %s\n", path);
     for (int i = 0; i < envCount + 1; i++) { LogToFile("-- %s\n", newEnvp[i]); }

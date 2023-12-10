@@ -34,7 +34,7 @@ int IsForegroundProcess()
         return -1; // or handle the error appropriately
     }
 
-    return (category_policy.role != TASK_UNSPECIFIED || category_policy.role != TASK_BACKGROUND_APPLICATION || category_policy.role != TASK_NONUI_APPLICATION || category_policy.role != TASK_DARWINBG_APPLICATION) ? 1 : 0;
+    return (category_policy.role != TASK_UNSPECIFIED || category_policy.role != TASK_NONUI_APPLICATION || category_policy.role != TASK_DARWINBG_APPLICATION) ? 1 : 0;
 }
 
 void Open(void * interceptor)
