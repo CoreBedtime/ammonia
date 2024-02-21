@@ -1,7 +1,5 @@
 #!/bin/bash
 
-#!/bin/bash
-
 FRIDA_VERSION=16.1.4
 
 mkdir -p temp

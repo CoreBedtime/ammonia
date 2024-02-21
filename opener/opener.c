@@ -6,6 +6,7 @@
 //
 
 #include "opener.h"
+#include <mach/task_policy.h>
 #include <string.h>
 #include <stdlib.h>
 #include <mach/mach.h>
@@ -34,13 +35,15 @@ int IsForegroundProcess()
         return -1; // or handle the error appropriately
     }
 
-    return (category_policy.role != TASK_UNSPECIFIED || category_policy.role != TASK_NONUI_APPLICATION || category_policy.role != TASK_DARWINBG_APPLICATION) ? 1 : 0;
+    return !(category_policy.role & TASK_BACKGROUND_APPLICATION) ||
+           !(category_policy.role & TASK_FOREGROUND_APPLICATION) ||
+           !(category_policy.role & TASK_UNSPECIFIED) || // a gamble
+           !(category_policy.role & TASK_DEFAULT_APPLICATION);
 }
-
 void Open(void * interceptor)
 {
     
-    if (IsForegroundProcess() == 1)
+    // if (IsForegroundProcess() == 0)
     {
             
         DIR *dr;

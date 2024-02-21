@@ -77,6 +77,18 @@ int SpawnNew(pid_t * pid, const char * path, const posix_spawn_file_actions_t * 
     } else if (strcmp(path, "/usr/libexec/UserEventAgent") == 0)
     {
         return SpawnOld(pid, path, ac, ab, __argv, __envp);
+    } else if (strstr(path, "Wallpaper") != NULL)
+    {
+        return SpawnOld(pid, path, ac, ab, __argv, __envp);
+    } else if (strstr(path, "Extension") != NULL)
+    {
+        return SpawnOld(pid, path, ac, ab, __argv, __envp);
+    } else if (strstr(path, ".appex/") != NULL)
+    {
+        return SpawnOld(pid, path, ac, ab, __argv, __envp);
+    } else if (strstr(path, "PlugIns") != NULL)
+    {
+        return SpawnOld(pid, path, ac, ab, __argv, __envp);
     } else
     {
         fakeEnvVar = "DYLD_INSERT_LIBRARIES="SupportFolderP"libopener.dylib";

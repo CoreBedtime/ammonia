@@ -31,6 +31,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		65F93D722B79B7CE00D1322D /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		65F93D742B79B7D800D1322D /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
+		65F93D762B79B7E300D1322D /* MetalKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MetalKit.framework; path = System/Library/Frameworks/MetalKit.framework; sourceTree = SDKROOT; };
 		9D2589BB2B0C1EEB00502E94 /* setup_frida.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = setup_frida.sh; sourceTree = "<group>"; };
 		9D2589BC2B0C1F2000502E94 /* libfrida-gum-x86_64-arm64e-arm64.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libfrida-gum-x86_64-arm64e-arm64.a"; sourceTree = "<group>"; };
 		9D2589C02B0C201600502E94 /* frida-gum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "frida-gum.h"; sourceTree = "<group>"; };
@@ -39,7 +42,6 @@
 		9D5E93A02B0CE4CC00B93A06 /* opener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = opener.h; sourceTree = "<group>"; };
 		9D5E93A12B0CE4CC00B93A06 /* opener.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = opener.c; sourceTree = "<group>"; };
 		9DF5B8ED2B0AF5F6004F8555 /* ammonia */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ammonia; sourceTree = BUILT_PRODUCTS_DIR; };
-		9DF5B8F92B0AFD5C004F8555 /* libRosetta.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libRosetta.dylib; sourceTree = "<group>"; };
 		9DF5B8FF2B0B1BE4004F8555 /* libbsm.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libbsm.tbd; path = usr/lib/libbsm.tbd; sourceTree = SDKROOT; };
 		9DF5B9012B0B1BF2004F8555 /* libEndpointSecurity.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libEndpointSecurity.tbd; path = usr/lib/libEndpointSecurity.tbd; sourceTree = SDKROOT; };
 		9DF5B9082B0B25EC004F8555 /* liblibinfect.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = liblibinfect.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -132,10 +134,12 @@
 		9DF5B8F82B0AFD5C004F8555 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				65F93D762B79B7E300D1322D /* MetalKit.framework */,
+				65F93D742B79B7D800D1322D /* Metal.framework */,
+				65F93D722B79B7CE00D1322D /* Cocoa.framework */,
 				9D2589BC2B0C1F2000502E94 /* libfrida-gum-x86_64-arm64e-arm64.a */,
 				9DF5B9012B0B1BF2004F8555 /* libEndpointSecurity.tbd */,
 				9DF5B8FF2B0B1BE4004F8555 /* libbsm.tbd */,
-				9DF5B8F92B0AFD5C004F8555 /* libRosetta.dylib */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -262,6 +266,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
 				LastUpgradeCheck = 1500;
 				TargetAttributes = {
 					9D5E939A2B0CE49900B93A06 = {

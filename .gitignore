@@ -20,6 +20,7 @@ Temporary Items
 
 Build/
 DerivedData
+ResourcesTarball
 
 *.pbxuser
 !default.pbxuser
@@ -34,3 +35,9 @@ xcuserdata
 *.xccheckout
 *.moved-aside
 *.xcuserstate
+
+*.dylib
+libfrida*
+libmini*
+ammonia/.DS_Store
+extravagant/.DS_Store
