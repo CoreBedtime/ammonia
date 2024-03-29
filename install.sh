@@ -2,7 +2,6 @@
 
 xcodebuild -project ammonia.xcodeproj -target opener -configuration clean build
 xcodebuild -project ammonia.xcodeproj -target libinfect -configuration clean build
-xcodebuild -project ammonia.xcodeproj -target extravagant -configuration clean build
 xcodebuild -project ammonia.xcodeproj -target ammonia -configuration clean 
 
 mkdir /usr/local/bin/ammonia/

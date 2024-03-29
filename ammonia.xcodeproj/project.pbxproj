@@ -7,15 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		65CC0B5C2BB70EC600493142 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 65CC0B5B2BB70EC600493142 /* main.m */; };
 		9D2589BD2B0C1F2000502E94 /* libfrida-gum-x86_64-arm64e-arm64.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D2589BC2B0C1F2000502E94 /* libfrida-gum-x86_64-arm64e-arm64.a */; };
 		9D2589C12B0C201600502E94 /* frida-gum.h in Headers */ = {isa = PBXBuildFile; fileRef = 9D2589C02B0C201600502E94 /* frida-gum.h */; };
 		9D5E93A22B0CE4CC00B93A06 /* opener.h in Headers */ = {isa = PBXBuildFile; fileRef = 9D5E93A02B0CE4CC00B93A06 /* opener.h */; };
 		9D5E93A32B0CE4CC00B93A06 /* opener.c in Sources */ = {isa = PBXBuildFile; fileRef = 9D5E93A12B0CE4CC00B93A06 /* opener.c */; };
 		9D7B40192B0C390F009AF1CB /* libbsm.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DF5B8FF2B0B1BE4004F8555 /* libbsm.tbd */; };
 		9DF5B90F2B0B25EC004F8555 /* libinfect.c in Sources */ = {isa = PBXBuildFile; fileRef = 9DF5B90E2B0B25EC004F8555 /* libinfect.c */; };
-		9DF5B9282B0B270A004F8555 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 9DF5B9272B0B270A004F8555 /* main.c */; };
-		9DF5B9322B0C0B4F004F8555 /* ammonia.c in Sources */ = {isa = PBXBuildFile; fileRef = 9DF5B9232B0B26DC004F8555 /* ammonia.c */; };
-		9DF5B9332B0C0B68004F8555 /* libextravagant.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DF5B92E2B0C0B27004F8555 /* libextravagant.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -31,6 +29,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		65CC0B5B2BB70EC600493142 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		65F93D722B79B7CE00D1322D /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		65F93D742B79B7D800D1322D /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
 		65F93D762B79B7E300D1322D /* MetalKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MetalKit.framework; path = System/Library/Frameworks/MetalKit.framework; sourceTree = SDKROOT; };
@@ -49,8 +48,6 @@
 		9DF5B9222B0B26DB004F8555 /* ammonia.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ammonia.h; sourceTree = "<group>"; };
 		9DF5B9232B0B26DC004F8555 /* ammonia.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ammonia.c; sourceTree = "<group>"; };
 		9DF5B9262B0B270A004F8555 /* main.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = main.h; sourceTree = "<group>"; };
-		9DF5B9272B0B270A004F8555 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
-		9DF5B92E2B0C0B27004F8555 /* libextravagant.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libextravagant.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,7 +62,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9DF5B9332B0C0B68004F8555 /* libextravagant.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -75,13 +71,6 @@
 			files = (
 				9D7B40192B0C390F009AF1CB /* libbsm.tbd in Frameworks */,
 				9D2589BD2B0C1F2000502E94 /* libfrida-gum-x86_64-arm64e-arm64.a in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		9DF5B92C2B0C0B27004F8555 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -116,7 +105,6 @@
 			children = (
 				9DF5B8ED2B0AF5F6004F8555 /* ammonia */,
 				9DF5B9082B0B25EC004F8555 /* liblibinfect.dylib */,
-				9DF5B92E2B0C0B27004F8555 /* libextravagant.a */,
 				9D5E939B2B0CE49900B93A06 /* libopener.dylib */,
 			);
 			name = Products;
@@ -126,7 +114,7 @@
 			isa = PBXGroup;
 			children = (
 				9DF5B9262B0B270A004F8555 /* main.h */,
-				9DF5B9272B0B270A004F8555 /* main.c */,
+				65CC0B5B2BB70EC600493142 /* main.m */,
 			);
 			path = ammonia;
 			sourceTree = "<group>";
@@ -178,13 +166,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				9D2589C12B0C201600502E94 /* frida-gum.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		9DF5B92A2B0C0B27004F8555 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -242,23 +223,6 @@
 			productReference = 9DF5B9082B0B25EC004F8555 /* liblibinfect.dylib */;
 			productType = "com.apple.product-type.library.dynamic";
 		};
-		9DF5B92D2B0C0B27004F8555 /* extravagant */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 9DF5B92F2B0C0B27004F8555 /* Build configuration list for PBXNativeTarget "extravagant" */;
-			buildPhases = (
-				9DF5B92A2B0C0B27004F8555 /* Headers */,
-				9DF5B92B2B0C0B27004F8555 /* Sources */,
-				9DF5B92C2B0C0B27004F8555 /* Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = extravagant;
-			productName = extravagant;
-			productReference = 9DF5B92E2B0C0B27004F8555 /* libextravagant.a */;
-			productType = "com.apple.product-type.library.static";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -278,9 +242,6 @@
 					9DF5B9072B0B25EC004F8555 = {
 						CreatedOnToolsVersion = 15.0.1;
 					};
-					9DF5B92D2B0C0B27004F8555 = {
-						CreatedOnToolsVersion = 15.0.1;
-					};
 				};
 			};
 			buildConfigurationList = 9DF5B8E82B0AF5F6004F8555 /* Build configuration list for PBXProject "ammonia" */;
@@ -298,7 +259,6 @@
 			targets = (
 				9DF5B8EC2B0AF5F6004F8555 /* ammonia */,
 				9DF5B9072B0B25EC004F8555 /* libinfect */,
-				9DF5B92D2B0C0B27004F8555 /* extravagant */,
 				9D5E939A2B0CE49900B93A06 /* opener */,
 			);
 		};
@@ -317,7 +277,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9DF5B9282B0B270A004F8555 /* main.c in Sources */,
+				65CC0B5C2BB70EC600493142 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -326,14 +286,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				9DF5B90F2B0B25EC004F8555 /* libinfect.c in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		9DF5B92B2B0C0B27004F8555 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				9DF5B9322B0C0B4F004F8555 /* ammonia.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -573,27 +525,6 @@
 			};
 			name = Release;
 		};
-		9DF5B9302B0C0B27004F8555 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				EXECUTABLE_PREFIX = lib;
-				ONLY_ACTIVE_ARCH = NO;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
-		};
-		9DF5B9312B0C0B27004F8555 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				EXECUTABLE_PREFIX = lib;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -629,15 +560,6 @@
 			buildConfigurations = (
 				9DF5B9112B0B25EC004F8555 /* Debug */,
 				9DF5B9122B0B25EC004F8555 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		9DF5B92F2B0C0B27004F8555 /* Build configuration list for PBXNativeTarget "extravagant" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				9DF5B9302B0C0B27004F8555 /* Debug */,
-				9DF5B9312B0C0B27004F8555 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
