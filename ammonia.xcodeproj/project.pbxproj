@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		654F3EA82BB7225B005FB52B /* ammonia.h in Headers */ = {isa = PBXBuildFile; fileRef = 654F3EA72BB7225B005FB52B /* ammonia.h */; };
+		654F3EA92BB7225B005FB52B /* ammonia.h in Headers */ = {isa = PBXBuildFile; fileRef = 654F3EA72BB7225B005FB52B /* ammonia.h */; };
 		65CC0B5C2BB70EC600493142 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 65CC0B5B2BB70EC600493142 /* main.m */; };
 		9D2589BD2B0C1F2000502E94 /* libfrida-gum-x86_64-arm64e-arm64.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D2589BC2B0C1F2000502E94 /* libfrida-gum-x86_64-arm64e-arm64.a */; };
 		9D2589C12B0C201600502E94 /* frida-gum.h in Headers */ = {isa = PBXBuildFile; fileRef = 9D2589C02B0C201600502E94 /* frida-gum.h */; };
@@ -29,6 +31,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		654F3EA72BB7225B005FB52B /* ammonia.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ammonia.h; sourceTree = "<group>"; };
 		65CC0B5B2BB70EC600493142 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		65F93D722B79B7CE00D1322D /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		65F93D742B79B7D800D1322D /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
@@ -45,8 +48,6 @@
 		9DF5B9012B0B1BF2004F8555 /* libEndpointSecurity.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libEndpointSecurity.tbd; path = usr/lib/libEndpointSecurity.tbd; sourceTree = SDKROOT; };
 		9DF5B9082B0B25EC004F8555 /* liblibinfect.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = liblibinfect.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DF5B90E2B0B25EC004F8555 /* libinfect.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = libinfect.c; sourceTree = "<group>"; };
-		9DF5B9222B0B26DB004F8555 /* ammonia.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ammonia.h; sourceTree = "<group>"; };
-		9DF5B9232B0B26DC004F8555 /* ammonia.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ammonia.c; sourceTree = "<group>"; };
 		9DF5B9262B0B270A004F8555 /* main.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = main.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -89,10 +90,10 @@
 		9DF5B8E42B0AF5F6004F8555 = {
 			isa = PBXGroup;
 			children = (
+				654F3EA72BB7225B005FB52B /* ammonia.h */,
 				9D2F7CFC2B0F08DA00EC9B51 /* install.sh */,
 				9D2589BB2B0C1EEB00502E94 /* setup_frida.sh */,
 				9DF5B8EF2B0AF5F6004F8555 /* ammonia */,
-				9DF5B9182B0B26BC004F8555 /* extravagant */,
 				9D5E939F2B0CE4AB00B93A06 /* opener */,
 				9DF5B9092B0B25EC004F8555 /* libinfect */,
 				9DF5B8EE2B0AF5F6004F8555 /* Products */,
@@ -141,15 +142,6 @@
 			path = libinfect;
 			sourceTree = "<group>";
 		};
-		9DF5B9182B0B26BC004F8555 /* extravagant */ = {
-			isa = PBXGroup;
-			children = (
-				9DF5B9222B0B26DB004F8555 /* ammonia.h */,
-				9DF5B9232B0B26DC004F8555 /* ammonia.c */,
-			);
-			path = extravagant;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -158,6 +150,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9D5E93A22B0CE4CC00B93A06 /* opener.h in Headers */,
+				654F3EA92BB7225B005FB52B /* ammonia.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -166,6 +159,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9D2589C12B0C201600502E94 /* frida-gum.h in Headers */,
+				654F3EA82BB7225B005FB52B /* ammonia.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
