@@ -128,7 +128,7 @@ void overriden__libsecinit_initializer(void)
     
 }
 
-__attribute__((used, section("__DATA,__interpose"))) static struct {
-    void (*overriden__libsecinit_initializer)(void);
-    void (*_libsecinit_initializer)(void);
-} _libsecinit_initializer_interpose = {overriden__libsecinit_initializer, _libsecinit_initializer};
+// __attribute__((used, section("__DATA,__interpose"))) static struct {
+//     void (*overriden__libsecinit_initializer)(void);
+//     void (*_libsecinit_initializer)(void);
+// } _libsecinit_initializer_interpose = {overriden__libsecinit_initializer, _libsecinit_initializer};

@@ -29,10 +29,14 @@ if [ ! -f "$plist_file" ]; then
     <array>
         <string>/usr/local/bin/ammonia/ammonia</string>
     </array>
-    <key>RunAtLoad</key>
-    <true/>
     <key>KeepAlive</key>
-    <false/>
+    <dict>
+        <key>OtherJobEnabled</key>
+        <dict>
+            <key>com.apple.mediaremoted</key>
+            <true/>
+        </dict>
+    </dict>
 </dict>
 </plist>
 EOF
@@ -40,4 +44,3 @@ fi
 
 # Load the launchd job
 launchctl load -w "$plist_file"
-

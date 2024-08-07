@@ -1,6 +1,6 @@
 #!/bin/bash
 
-FRIDA_VERSION=16.1.4
+FRIDA_VERSION=16.2.1
 
 mkdir -p temp
 cd temp
