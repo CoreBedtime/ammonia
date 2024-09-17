@@ -8,9 +8,9 @@ mkdir /usr/local/bin/ammonia/
 
 cp ./fridagum.dylib /usr/local/bin/ammonia/
 
-mv ./Build/Release/ammonia /usr/local/bin/ammonia/
-mv ./Build/Release/liblibinfect.dylib /usr/local/bin/ammonia/
-mv ./Build/Release/libopener.dylib /usr/local/bin/ammonia/
+cp ./Build/Release/ammonia /usr/local/bin/ammonia/
+cp ./Build/Release/liblibinfect.dylib /usr/local/bin/ammonia/
+cp ./Build/Release/libopener.dylib /usr/local/bin/ammonia/
 
 # Define the path to the plist file
 plist_file="/Library/LaunchDaemons/com.amm.loader.plist"

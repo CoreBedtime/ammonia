@@ -151,8 +151,10 @@ int SpawnNew(pid_t * pid, const char * path, const posix_spawn_file_actions_t * 
     } else if (strcmp(path, "/System/Library/CoreServices/iconservicesd") == 0)
     {
         return SpawnOld(pid, path, ac, ab, __argv, __envp);
-    } else if (strcmp(path, "/usr/libexec/UserEventAgent") == 0)
+    } else if (strcmp(path, "/usr/libexec/sandboxd") == 0)
     {
+        return SpawnOld(pid, path, ac, ab, __argv, __envp);
+    } else if (strcmp(path, "/usr/libexec/UserEventAgent") == 0)
         return SpawnOld(pid, path, ac, ab, __argv, __envp);
     } else if (strstr(path, "Wallpaper") != NULL)
     {
