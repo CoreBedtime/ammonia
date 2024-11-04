@@ -55,6 +55,7 @@ void LogToFile(const char *format, ...)
 }
 
 // https://github.com/evelyneee/ellekit/blob/24033cc3cfa78cfd64908fc9f4b63f1880adeb93/ellekitc/ellekitc.c#L53
+// thanks siguza
 int (*SandboxCheckOld)(audit_token_t au, const char *operation, int sandbox_filter_type, ...) ;
 int SandboxCheck(audit_token_t au, const char *operation, int sandbox_filter_type, ...) 
 {    
@@ -70,12 +71,12 @@ int SandboxCheck(audit_token_t au, const char *operation, int sandbox_filter_typ
     const void *arg8 = va_arg(a, void *);
     const void *arg9 = va_arg(a, void *);
     const void *arg10 = va_arg(a, void *);
-    if (name && operation) 
-    {
-        LogToFile("op: %s \n", operation);
-        if (strcmp(operation, "file-map-executable") == 0)
-        {
-            return 0;
+    if (name && operation) {
+        if (strcmp(operation, "mach-lookup") == 0) {
+            if (strcmp(name, "com.example.dockkeybind") == 0) {
+                /* always allow */
+                return 0;
+            }
         }
     }
     return SandboxCheckOld(au, operation, sandbox_filter_type, name, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);;
@@ -151,10 +152,8 @@ int SpawnNew(pid_t * pid, const char * path, const posix_spawn_file_actions_t * 
     } else if (strcmp(path, "/System/Library/CoreServices/iconservicesd") == 0)
     {
         return SpawnOld(pid, path, ac, ab, __argv, __envp);
-    } else if (strcmp(path, "/usr/libexec/sandboxd") == 0)
-    {
-        return SpawnOld(pid, path, ac, ab, __argv, __envp);
     } else if (strcmp(path, "/usr/libexec/UserEventAgent") == 0)
+    {
         return SpawnOld(pid, path, ac, ab, __argv, __envp);
     } else if (strstr(path, "Wallpaper") != NULL)
     {
@@ -166,6 +165,12 @@ int SpawnNew(pid_t * pid, const char * path, const posix_spawn_file_actions_t * 
     {
         return SpawnOld(pid, path, ac, ab, __argv, __envp);
     } else if (strstr(path, "PlugIns") != NULL)
+    {
+        return SpawnOld(pid, path, ac, ab, __argv, __envp);
+    } else if (strstr(path, "sandboxd") != NULL)
+    {
+        return SpawnOld(pid, path, ac, ab, __argv, __envp);
+    } else if (strstr(path, "fileproviderd") != NULL)
     {
         return SpawnOld(pid, path, ac, ab, __argv, __envp);
     } else
@@ -225,6 +230,6 @@ void __attribute__((constructor)) Infect(void)
     gum_interceptor_begin_transaction (interceptor);
     gum_interceptor_replace (interceptor, (gpointer)gum_module_find_export_by_name(NULL, "posix_spawn"), (gpointer)SpawnNew, NULL, (gpointer *)&SpawnOld);
     gum_interceptor_replace (interceptor, (gpointer)gum_module_find_export_by_name(NULL, "posix_spawnp"), (gpointer)SpawnPNew, NULL, (gpointer *)(NULL));
-    //gum_interceptor_replace (interceptor, (gpointer)gum_module_find_export_by_name(NULL, "sandbox_check_by_audit_token"), (gpointer)SandboxCheck, NULL, (gpointer *)&SandboxCheckOld);
+    gum_interceptor_replace (interceptor, (gpointer)gum_module_find_export_by_name(NULL, "sandbox_check_by_audit_token"), (gpointer)SandboxCheck, NULL, (gpointer *)&SandboxCheckOld);
     gum_interceptor_end_transaction (interceptor);
 }
