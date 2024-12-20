@@ -73,9 +73,8 @@ int SandboxCheck(audit_token_t au, const char *operation, int sandbox_filter_typ
     const void *arg10 = va_arg(a, void *);
     if (name && operation) {
         if (strcmp(operation, "mach-lookup") == 0) {
-            if (strcmp(name, "com.example.dockkeybind") == 0) {
-                /* always allow */
-                return 0;
+            if (strstr(name, "ammonia")) {
+                return 0; // yas ! allow mach ports
             }
         }
     }
@@ -158,16 +157,10 @@ int SpawnNew(pid_t * pid, const char * path, const posix_spawn_file_actions_t * 
     } else if (strstr(path, "Wallpaper") != NULL)
     {
         return SpawnOld(pid, path, ac, ab, __argv, __envp);
-    } else if (strstr(path, "Extension") != NULL)
-    {
-        return SpawnOld(pid, path, ac, ab, __argv, __envp);
-    } else if (strstr(path, ".appex/") != NULL)
-    {
-        return SpawnOld(pid, path, ac, ab, __argv, __envp);
-    } else if (strstr(path, "PlugIns") != NULL)
-    {
-        return SpawnOld(pid, path, ac, ab, __argv, __envp);
     } else if (strstr(path, "sandboxd") != NULL)
+    {
+        return SpawnOld(pid, path, ac, ab, __argv, __envp);
+    } else if (strstr(path, "Driver") != NULL)
     {
         return SpawnOld(pid, path, ac, ab, __argv, __envp);
     } else if (strstr(path, "fileproviderd") != NULL)
@@ -223,6 +216,26 @@ int SpawnPNew(pid_t *restrict pid, const char *restrict path, const posix_spawn_
     return SpawnNew(pid, path, ac, ab, argv, envp);
 }
 
+int (*_CSOps)(pid_t pid, unsigned int  ops, void * useraddr, size_t usersize);
+int HookedCSOps(pid_t pid, unsigned int ops, void *useraddr, size_t usersize) {
+    int result = _CSOps(pid, ops, useraddr, usersize);
+    if (result != 0) return result;
+    if (ops == 0) { // CS_OPS_STATUS
+       *((uint32_t *)useraddr) |= 0x4000001; // CS_PLATFORM_BINARY
+    }
+    return result;
+}
+
+int (*_CSOpsAuditToken)(pid_t pid, unsigned int  ops, void * useraddr, size_t usersize, audit_token_t * token);
+int HookedCSOpsAuditToken(pid_t pid, unsigned int ops, void * useraddr, size_t usersize, audit_token_t * token) {
+    int result = _CSOpsAuditToken(pid, ops, useraddr, usersize, token);
+    if (result != 0) return result;
+    if (ops == 0) { // CS_OPS_STATUS
+       *((uint32_t *)useraddr) |= 0x4000001; // CS_PLATFORM_BINARY
+    }
+    return result;
+}
+
 void __attribute__((constructor)) Infect(void)
 {
     gum_init_embedded();
@@ -231,5 +244,7 @@ void __attribute__((constructor)) Infect(void)
     gum_interceptor_replace (interceptor, (gpointer)gum_module_find_export_by_name(NULL, "posix_spawn"), (gpointer)SpawnNew, NULL, (gpointer *)&SpawnOld);
     gum_interceptor_replace (interceptor, (gpointer)gum_module_find_export_by_name(NULL, "posix_spawnp"), (gpointer)SpawnPNew, NULL, (gpointer *)(NULL));
     gum_interceptor_replace (interceptor, (gpointer)gum_module_find_export_by_name(NULL, "sandbox_check_by_audit_token"), (gpointer)SandboxCheck, NULL, (gpointer *)&SandboxCheckOld);
+    gum_interceptor_replace (interceptor, (gpointer)gum_module_find_export_by_name(NULL, "csops"), (gpointer)HookedCSOps, NULL, (gpointer *)&_CSOps);
+    gum_interceptor_replace (interceptor, (gpointer)gum_module_find_export_by_name(NULL, "csops_audittoken"), (gpointer)HookedCSOpsAuditToken, NULL, (gpointer *)&_CSOpsAuditToken);
     gum_interceptor_end_transaction (interceptor);
 }
