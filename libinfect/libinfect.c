@@ -23,7 +23,6 @@
 #include <sys/_types/_null.h>
 #include <sys/_types/_pid_t.h>
 #include <sys/sysctl.h>
-#include <CoreSymbolication.h>
 #include <unistd.h>
 
 #include "ammonia.h"

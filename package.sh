@@ -3,7 +3,7 @@
 # Check if the variable $glowbuildfolder is set and not empty
 if [ -z "$ammoniabuildfolder" ]; then
     # Check if libglow.dylib exists in the current directory
-    if [ -f "./Build/Release/ammonia" ]; then
+    if [ -f "./Build/ammonia" ]; then
         # Set $glowbuildfolder to the current directory
         ammoniabuildfolder=$(pwd)
     else
@@ -26,9 +26,9 @@ chmod +x $ammoniabuildfolder/scripts/postinstall
 mkdir $ammoniabuildfolder/temp
 mkdir $ammoniabuildfolder/temp/tweaks
 cp $ammoniabuildfolder/./fridagum.dylib $ammoniabuildfolder/temp/
-cp $ammoniabuildfolder/./Build/Release/ammonia $ammoniabuildfolder/temp/
-cp $ammoniabuildfolder/./Build/Release/liblibinfect.dylib $ammoniabuildfolder/temp/
-cp $ammoniabuildfolder/./Build/Release/libopener.dylib $ammoniabuildfolder/temp/
+cp $ammoniabuildfolder/./Build/ammonia $ammoniabuildfolder/temp/
+cp $ammoniabuildfolder/./Build/liblibinfect.dylib $ammoniabuildfolder/temp/
+cp $ammoniabuildfolder/./Build/libopener.dylib $ammoniabuildfolder/temp/
 
 # Build the package
 sudo pkgbuild --install-location /usr/local/bin/ammonia/ --root $ammoniabuildfolder/temp --scripts ./scripts --identifier net.bedtime.ammonia "$ammoniabuildfolder/ammonia.pkg"
