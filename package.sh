@@ -16,11 +16,37 @@ fi
 # Create a directory for the scripts
 mkdir $ammoniabuildfolder/scripts
 
-# Create a postinstall script that copies sets up the LaunchDaemon
-echo '#!/bin/sh\n\necho "<?xml version=\\"1.0\\" encoding=\\"UTF-8\\"?>\\n<!DOCTYPE plist PUBLIC \\"-//Apple//DTD PLIST 1.0//EN\\" \\"http://www.apple.com/DTDs/PropertyList-1.0.dtd\\">\\n<plist version=\\"1.0\\">\\n<dict>\\n	<key>Label</key>\\n	<string>com.bedtime.ammonia</string>\\n	<key>ProgramArguments</key>\\n	<array>\\n		<string>/usr/local/bin/ammonia/ammonia</string>\\n	</array>\\n	<key>RunAtLoad</key>\\n	<true/>\\n	<key>KeepAlive</key>\\n	<false/>\\n</dict>\\n</plist>" > /Library/LaunchDaemons/com.bedtime.ammonia.plist\nlaunchctl load com.bedtime.ammonia\nexit 0' > $ammoniabuildfolder/scripts/postinstall
+# Create a postinstall script to set up the LaunchDaemon
+cat <<EOL > "$ammoniabuildfolder/scripts/postinstall"
+#!/bin/sh
 
-# Make the preinstall script executable
-chmod +x $ammoniabuildfolder/scripts/postinstall
+echo "<?xml version=\\"1.0\\" encoding=\\"UTF-8\\"?>
+<!DOCTYPE plist PUBLIC \\"-//Apple//DTD PLIST 1.0//EN\\" \\"http://www.apple.com/DTDs/PropertyList-1.0.dtd\\">
+<plist version=\\"1.0\\">
+<dict>
+    <key>Label</key>
+    <string>com.bedtime.ammonia</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>/usr/local/bin/ammonia/ammonia</string>
+    </array>
+    <key>RunAtLoad</key>
+    <true/>
+    <key>KeepAlive</key>
+    <false/>
+</dict>
+</plist>" > /Library/LaunchDaemons/com.bedtime.ammonia.plist
+
+launchctl load /Library/LaunchDaemons/com.bedtime.ammonia.plist
+nvram boot-args="-arm64e_preview_abi $(nvram boot-args 2>/dev/null | cut -f 2-)"
+defaults write /Library/Preferences/com.apple.security.libraryvalidation.plist DisableLibraryValidation -bool true
+
+exit 0
+EOL
+
+# Make the postinstall script executable
+chmod +x "$ammoniabuildfolder/scripts/postinstall"
+
 
 # Create a temporary directory and setup the installation files in it.
 mkdir $ammoniabuildfolder/temp
