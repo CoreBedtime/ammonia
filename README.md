@@ -23,4 +23,4 @@ The Ammonia tweak injector is a powerful tool designed to inject tweaks into mac
   - Restart your Mac
 
 ## I just want the build!
-[Grab the PKG here](https://github.com/CoreBedtime/ammonia/releases/download/1.0/ammonia.pkg)
+[Grab the PKG here](https://github.com/CoreBedtime/ammonia/releases/download/1.1/ammonia.pkg)
