@@ -41,3 +41,5 @@ libfrida*
 libmini*
 ammonia/.DS_Store
 extravagant/.DS_Store
+ammonia.pkg
+.cache

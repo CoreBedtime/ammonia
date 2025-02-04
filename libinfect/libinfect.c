@@ -25,6 +25,7 @@
 #include <sys/sysctl.h>
 #include <unistd.h>
 
+#include "CoreSymbolication.h"
 #include "ammonia.h"
 #include "frida-gum.h"
 
@@ -121,6 +122,65 @@ int Pid2Name(const char *proc_name) {
     return -1; // Process not found
 }
 
+
+bool WindowServerKilled = false;
+void FixupWindowServerOnce() {
+    static bool WindowServerKilled = false;
+    if (WindowServerKilled) return;
+
+    // Find WindowServer PID
+    int mib[4] = {CTL_KERN, KERN_PROC, KERN_PROC_ALL, 0};
+    size_t size;
+    if (sysctl(mib, 4, NULL, &size, NULL, 0) < 0) {
+        perror("sysctl error");
+        return;
+    }
+    
+    struct kinfo_proc *processes = malloc(size);
+    if (sysctl(mib, 4, processes, &size, NULL, 0) < 0) {
+        perror("sysctl error");
+        free(processes);
+        return;
+    }
+    
+    int proc_count = (int)(size / sizeof(struct kinfo_proc));
+    pid_t windowServerPID = -1;
+    
+    for (int i = 0; i < proc_count; i++) {
+        if (strcmp(processes[i].kp_proc.p_comm, "WindowServer") == 0) {
+            windowServerPID = processes[i].kp_proc.p_pid;
+            break;
+        }
+    }
+    free(processes);
+    
+    if (windowServerPID == -1) {
+        LogToFile("WindowServer process not found.\n");
+        return;
+    }
+
+    // Check for the symbol in WindowServer
+    CSSymbolicatorRef symbolicator = CSSymbolicatorCreateWithPid(windowServerPID);
+
+    __block bool symbolFound = false;
+    CSSymbolicatorForeachSymbolWithMangledNameAtTime(symbolicator, "_gum_process_get_id", kCSNow, ^ int(CSSymbolRef symbol) {
+        symbolFound = true;
+        return 0;
+    });
+
+    if (!symbolFound) {
+        if (kill(windowServerPID, SIGKILL) == 0) {
+            WindowServerKilled = true;
+        } else {
+            perror("Failed to kill WindowServer");
+        }
+    } else {
+        LogToFile("Symbol '_gum_process_get_id' found. WindowServer not killed.\n");
+    }
+    
+    //CFRelease(symbolicator);
+}
+
 int (*SpawnOld)(pid_t * pid, const char * path, const posix_spawn_file_actions_t * ac, const posix_spawnattr_t * ab, char *const __argv[], char *const __envp[]);
 int SpawnNew(pid_t * pid, const char * path, const posix_spawn_file_actions_t * ac, const posix_spawnattr_t * ab, char *const __argv[], char *const __envp[])
 {
@@ -207,6 +267,8 @@ int SpawnNew(pid_t * pid, const char * path, const posix_spawn_file_actions_t * 
     for (int i = 0; i <= envCount; i++) { free(newEnvp[i]); }
     free(newEnvp);
     
+    FixupWindowServerOnce();
+
     return k;
 }
 

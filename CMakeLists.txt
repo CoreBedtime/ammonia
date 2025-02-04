@@ -24,9 +24,16 @@ target_include_directories(ammonia PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}
 )
 
+set(PRIVATE_FRAMEWORKS_PATH /System/Library/PrivateFrameworks)
+
 # Link necessary frameworks (e.g., CoreFoundation, Foundation, etc.)
 find_library(COCOA_FRAMEWORK Cocoa REQUIRED)
 find_library(COREFOUNDATION_FRAMEWORK CoreFoundation REQUIRED)
+find_library(CORESYMBOLICATION_FRAMEWORK CoreSymbolication 
+    PATHS ${PRIVATE_FRAMEWORKS_PATH}
+    NO_DEFAULT_PATH
+    REQUIRED
+)
 
 target_link_libraries(ammonia
     ${COCOA_FRAMEWORK}
@@ -42,6 +49,7 @@ target_link_libraries(libinfect
     ${COCOA_FRAMEWORK}
     ${COREFOUNDATION_FRAMEWORK}
     ${CMAKE_CURRENT_SOURCE_DIR}/libfrida-gum-x86_64-arm64e-arm64.a
+    ${CORESYMBOLICATION_FRAMEWORK}
 )
 
 target_include_directories(libinfect PRIVATE
